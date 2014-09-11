@@ -1,0 +1,37 @@
+# benchmark
+
+reset
+set terminal pngcairo size 1024,768
+set output 'bench.png'
+
+set multiplot layout 3,1 title "Scheme Benchmark" font ",16"
+
+set style data histogram
+set style fill solid border
+
+set key outside horiz center top
+
+set boxwidth 0.95
+set style histogram clustered gap 3
+set xtic rotate by -45 scale 0
+set autoscale x
+set autoscale y
+
+##
+unset ytics
+
+set title 'performance (more is better)'
+set ylabel 'performance'
+plot for [i=2:4] 'bench-ratio.dat' u i:xtic(1) ti col
+
+##
+unset key
+set bmargin at screen 0.1
+
+set title 'time (seconds, less is better)'
+set ylabel 'time'
+plot for [i=2:4] 'bench-time.dat' u i:xtic(1) ti col
+
+##
+unset multiplot
+
