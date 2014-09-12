@@ -5,6 +5,11 @@ endif
 CWD      ?= $(PWD)
 BENCHDIR ?= bench
 
+ifneq ($(shell test -d $(BENCHDIR); echo -n $$?),0)
+$(error the path "$(BENCHDIR)" does not exist, \
+	please define BENCHDIR to the correct path)
+endif
+
 YPSILON ?= ypsilon
 GAUCHE  ?= gosh
 GUILE   ?= GUILE_WARN_DEPRECATED=no guile
